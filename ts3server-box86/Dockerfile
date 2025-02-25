@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y \
     cmake \
     build-essential \
     libsdl2-dev \
-    libx11-dev \
-    && rm -rf /var/lib/apt/lists/*
+    libx11-dev && \
+    rm -rf /var/lib/apt/lists/*
 
 # Installiere Box64
 RUN git clone https://github.com/ptitSeb/box64.git && \
