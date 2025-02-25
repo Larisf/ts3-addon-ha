@@ -23,6 +23,7 @@ RUN git clone https://github.com/ptitSeb/box64.git && \
     make install && \
     cd / && \
     rm -rf box64
+    
 
 # Hole immer die neuste TS3 Server Version
 WORKDIR /app
@@ -32,6 +33,24 @@ RUN TS3_URL=$(curl -s 'https://www.teamspeak.com/versions/server.json' | jq -r '
     rm ts3server.tar.bz2 && \
     touch .ts3server_license_accepted
 
+# Zusätzliche Installationen
+RUN apt-get install -y nodejs npm
+
+# Webinterface bauen
+COPY webgui /webgui
+RUN cd /webgui && \
+    npm install && \
+    npm run build && \
+    mv build /usr/share/nginx/html && \
+    rm -rf /webgui
+
+# Nginx für das GUI
+COPY nginx.conf /etc/nginx/nginx.conf
+EXPOSE 8080
+
+# Starte beide Dienste
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+CMD ["/usr/bin/supervisord"]
 # Startscript kopieren
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
