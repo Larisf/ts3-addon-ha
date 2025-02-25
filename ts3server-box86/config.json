@@ -1,3 +1,4 @@
+#bin/bash
 cat > config.json <<EOF
 {
   "name": "TS3 Server (Box64)",
