@@ -27,10 +27,10 @@ RUN git clone https://github.com/ptitSeb/box64.git && \
 # Hole immer die neuste TS3 Server Version
 # TeamSpeak Server vorbereiten
 WORKDIR /app
-RUN wget -O ts3server.tar.bz2 https://files.teamspeak-services.com/releases/server/3.13.7/teamspeak3-server_linux_amd64-3.13.7.tar.bz2 \\
-    && tar xvf ts3server.tar.bz2 --strip-components=1 \\
-    && rm ts3server.tar.bz2 \\
-    && touch .ts3server_license_accepted
+RUN wget -O ts3server.tar.bz2 https://files.teamspeak-services.com/releases/server/3.13.7/teamspeak3-server_linux_amd64-3.13.7.tar.bz2 && \
+    tar xvf ts3server.tar.bz2 --strip-components=1 && \
+    rm ts3server.tar.bz2 && \
+    touch .ts3server_license_accepted
 
 # Startscript kopieren
 COPY entrypoint.sh /
