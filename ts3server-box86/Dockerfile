@@ -34,11 +34,7 @@ RUN wget -O ts3server.tar.bz2 https://files.teamspeak-services.com/releases/serv
 
 # Startscript kopieren
 COPY entrypoint.sh /
-RUN chmod +x /entrypoint.sh
-
-# Backup-Skript kopieren
-COPY backup.sh /backup.sh
-RUN chmod +x /backup.sh
+RUN chmod +x /entrypoint.s
 
 # Starte standardmäßig das Start-Skript
 ENTRYPOINT ["/entrypoint.sh"]
